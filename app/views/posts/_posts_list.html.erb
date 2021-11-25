@@ -1,5 +1,9 @@
 
-<h4>Posts</h4>
+<h4 class="border-bottom">Posts</h4>
+<% unless @posts.present? %>
+  <small class="text-black-50"> No post available</small>
+<% end %>
+
 <% @posts.each do |post| %>
   <div class="card mb-3">
     <div class="card-body">
