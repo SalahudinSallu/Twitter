@@ -1,0 +1,23 @@
+
+<h4>Posts</h4>
+<% @posts.each do |post| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= post.user.email %></h5>
+      <p class="card-text"><%= post.body %></p>
+      <p>
+        <small class="text-black-50">created <%= time_ago_in_words(post.created_at)%> ago</small>
+      </p>
+
+      <% if user_signed_in? && current_user == post.user %>
+        <% if post.public_post? %>
+          <%= link_to "Unpublish", unpublish_post_path(post), class: "btn btn-primary", method: :put %>
+        <% else %>
+          <%= link_to "Publish", publish_post_path(post), class: "btn btn-primary", method: :put %>
+        <% end %>
+        <%= link_to "Edit", edit_post_path(post), class: "btn btn-primary" %>
+        <%= link_to "Delete", post_path(post), class: "btn btn-danger", method: :delete %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
